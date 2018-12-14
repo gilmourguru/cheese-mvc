@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}"></title>
+<head th:replace="fragments :: head">
+
 </head>
 <body>
-    <h1 th:text="${heading}"></h1>
+<div class="container">
+    <h1 th:text="${heading}" class="text-center"></h1>
+
+    <nav th:replace="fragments :: navigation"></nav>
 
     <p th:unless="${cheeses} and ${cheeses.size()}">no cheese yet...</p>
 
-    <a href="/cheese/add">Add Cheese</a>
-    <ul>
-        <li th:each="cheese : ${cheeses}" th:text="${cheese}"></li>
-    </ul>
-
-    <table>
-        <tr>
-            <td>Cheese total: </td>
-            <td th:text="${cheeses.size()}"></td>
+    <table class="table table-condensed table-hover">
+        <thead>
+        <th>Cheese</th>
+        <th>Description</th>
+        </thead>
+        <tbody>
+        <tr th:each="cheese : ${cheeses}">
+            <td th:text="${cheese.key}"></td>
+            <td th:text="${cheese.value}"></td>
         </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Cheeses Total:</th>
+            <th th:text="${cheeses.size()}"></th>
+        </tr>
+        </tfoot>
     </table>
+    <!--<ul>-->
+    <!--<li th:each="cheese : ${cheeses}" th:text="${cheese.key}"></li>-->
+    <!--</ul>-->
+
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td>Cheese total: </td>-->
+    <!--<td th:text="${cheeses.size()}"></td>-->
+    <!--</tr>-->
+    <!--</table>-->
+</div>
+
 
 
 </body>
